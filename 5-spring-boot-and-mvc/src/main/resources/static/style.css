@@ -32,8 +32,8 @@ h3 {
     font-family: "Arial", serif;
     position: absolute;
     top: 210px;
-    left: 450px;
-    width: 800px;
+    left: 350px;
+    width: 1000px;
     text-align: center;
     font-weight: normal;
     font-size: 25px;
@@ -90,21 +90,29 @@ h4 {
     display: block;
     margin: 0 auto;
 }
-
 .features {
     text-align: center;
     margin: 0 auto 30px;
     padding: 0 20px;
 }
 
-.features p {
+.features .feature {
     display: inline-block;
     vertical-align: top;
     width: 30%;
     margin: 0 5px;
-    background-repeat: no-repeat;
-    background-position: center top;
-    text-transform: uppercase;}
+    text-align: center;
+}
+
+.features .feature img {
+    width: 100%;
+    max-width: 100px;
+}
+
+.features .feature p {
+    margin-top: 10px;
+}
+
 .images {
     display: flex;
     width: 100%;
