@@ -18,14 +18,14 @@ public class LocalBasketRepository implements BasketRepository{
             new Basket(1, new ArrayList<>(List.of(new Product(3, "Персик", BigDecimal.valueOf(30),1))), "CODE3")
     ));
 
-    private final LocalProductRepository localProductRepository;
+    private final ProductRepository productRepository;
 
-    public LocalBasketRepository(LocalProductRepository localProductRepository) {
-        this.localProductRepository = localProductRepository;
+    public LocalBasketRepository(ProductRepository productRepository) {
+        this.productRepository = productRepository;
     }
     @Override
     public boolean addProductToBasket(long basketId, long productId) {
-        Optional<Product> optionalProduct = localProductRepository.findById(productId);
+        Optional<Product> optionalProduct = productRepository.findById(productId);
         if (optionalProduct.isPresent()) {
             Product product = optionalProduct.get();
 
@@ -46,5 +46,7 @@ public class LocalBasketRepository implements BasketRepository{
                 .filter(basket -> basket.getBasketId() == basketId)
                 .findFirst();
     }
+
+
 
 }
