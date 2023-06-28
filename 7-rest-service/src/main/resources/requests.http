@@ -1,0 +1,61 @@
+###
+POST localhost:8080/clients
+Content-Type: application/json
+
+{
+  "clientName": "Елизавета",
+  "login": "elizaveta",
+  "password": "12345",
+  "email": "elizaveta@gmail.com"
+}
+###
+GET localhost:8080/clients
+Content-Type: application/json
+###
+DELETE localhost:8080/clients/1
+
+
+###
+POST localhost:8080/products
+Content-Type: application/json
+
+{
+  "productName": "Морковь",
+  "price": 70,
+  "count": 1
+}
+
+###
+GET localhost:8080/products
+Content-Type: application/json
+
+###
+GET localhost:8080/products/1
+
+###
+PUT localhost:8080/products
+Content-Type: application/json
+
+{
+  "productId": 1,
+  "productName": "Апельсин",
+  "price": 80,
+  "count": 1
+}
+
+###
+DELETE localhost:8080/products/1
+
+###
+POST localhost:8080/basket/1
+Content-Type: application/json
+
+{
+  "productId": 2
+}
+
+###
+GET localhost:8080/basket/1
+Content-Type: application/json
+
+
