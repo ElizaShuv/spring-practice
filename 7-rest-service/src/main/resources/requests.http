@@ -9,8 +9,9 @@ Content-Type: application/json
   "email": "elizaveta@gmail.com"
 }
 ###
-GET localhost:8080/clients
+GET localhost:8080/clients?clientId=1
 Content-Type: application/json
+
 ###
 DELETE localhost:8080/clients/1
 
@@ -26,7 +27,7 @@ Content-Type: application/json
 }
 
 ###
-GET localhost:8080/products
+GET localhost:8080/products?name=Яблоко
 Content-Type: application/json
 
 ###
@@ -47,7 +48,7 @@ Content-Type: application/json
 DELETE localhost:8080/products/1
 
 ###
-POST localhost:8080/basket/1
+POST localhost:8080/basket/94697
 Content-Type: application/json
 
 {
@@ -55,7 +56,29 @@ Content-Type: application/json
 }
 
 ###
-GET localhost:8080/basket/1
+GET localhost:8080/basket/643059
 Content-Type: application/json
 
+###
+PUT localhost:8080/basket/94697/product/2?count=3
+Content-Type: application/json
 
+###
+DELETE localhost:8080/basket/692268
+Content-Type: application/json
+
+{
+  "productId": 2
+}
+
+###
+POST localhost:8080/bank
+Content-Type: application/json
+
+{
+  "clientId": 94697,
+  "balance": 1000.00
+}
+###
+POST localhost:8080/bank/basket?clientId=94697
+Content-Type: application/json

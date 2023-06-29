@@ -13,27 +13,36 @@ import java.util.stream.Collectors;
  */
 @Repository
 public class LocalClientRepository implements ClientRepository {
-    private List<Client> clients = new ArrayList<>(List.of(
-            new Client(1,"Иван", "ivan", "11111","ivan@mail.ru", new Basket(1,List.of(new Product(1,"Яблоко", BigDecimal.valueOf(50),1)), "CODE1")
-    )));
 
+    private List<Client> clients = new ArrayList<>(List.of(
+            new Client(1,"Иван", "ivan", "11111","ivan@mail.ru", new Basket(1, new ArrayList<>(List.of(new Product(3, "Персик", BigDecimal.valueOf(30),1))), "")
+            )
+    ));
+
+    private final BasketRepository basketRepository;
+
+    public LocalClientRepository(BasketRepository basketRepository) {
+        this.basketRepository = basketRepository;
+    }
     @Override
         public long saveClient(Client client) {
             long clientId = generateId();
             client.setClientId(clientId);
-
             clients.add(client);
+            client.setClientBasket( basketRepository.createBasket(clientId));
             return clientId;
     }
+
+
     @Override
-    public List<Map<String, Object>> findAll(Long clientId) {
+    public List<Map<String, Object>> findClient(Long clientId) {
         return clients.stream()
                 .filter(client -> clientId == null || client.getClientId() == clientId)
                 .map(client -> {
                     Map<String, Object> response = new HashMap<>();
-                    response.put("clientId", client.getClientId());
                     response.put("clientName", client.getClientName());
                     response.put("email", client.getEmail());
+                    response.put("clientBasket",client.getClientBasket());
                     return response;
                 })
                 .collect(Collectors.toList());
@@ -49,5 +58,11 @@ public class LocalClientRepository implements ClientRepository {
         int low = 1;
         int high = 1_000_000;
         return random.nextLong(high - low) + low;
+    }
+    @Override
+    public Optional<Client> getById(long clientID) {
+        return clients.stream()
+                .filter(client -> client.getClientId() == clientID)
+                .findAny();
     }
 }

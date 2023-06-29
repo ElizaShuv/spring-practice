@@ -2,6 +2,7 @@ package ru.sber.repository;
 
 import org.springframework.stereotype.Repository;
 import ru.sber.model.Basket;
+
 import ru.sber.model.Product;
 
 import java.math.BigDecimal;
@@ -14,30 +15,27 @@ import java.util.Optional;
 @Repository
 public class LocalBasketRepository implements BasketRepository{
 
-    private final List<Basket> baskets = new ArrayList<>(List.of(
-            new Basket(1, new ArrayList<>(List.of(new Product(3, "Персик", BigDecimal.valueOf(30),1))), "CODE3")
+    private  List<Basket> baskets = new ArrayList<>(List.of(
+            new Basket(1, new ArrayList<>(List.of(new Product(3, "Персик", BigDecimal.valueOf(30),1))), "")
     ));
 
     private final ProductRepository productRepository;
 
     public LocalBasketRepository(ProductRepository productRepository) {
         this.productRepository = productRepository;
-    }
-    @Override
-    public boolean addProductToBasket(long basketId, long productId) {
-        Optional<Product> optionalProduct = productRepository.findById(productId);
-        if (optionalProduct.isPresent()) {
-            Product product = optionalProduct.get();
 
-            for (Basket basket : baskets) {
-                if (basket.getBasketId() == basketId) {
-                    Product newProduct = new Product(product.getProductId(), product.getProductName(), product.getPrice(), product.getCount());
-                    basket.getProductList().add(newProduct);
-                    return true;
-                }
-            }
+    }
+
+    @Override
+    public Optional<Basket> addProductToBasket(long basketId, long productId) {
+        Optional<Basket> basket = getBasketById(basketId);
+        Optional<Product> product = productRepository.findById(productId);
+        if (basket.isPresent() && product.isPresent()) {
+            Product addProduct = new Product(product.get().getProductId(), product.get().getProductName(), product.get().getPrice(), product.get().getCount());
+            basket.get().getProductList().add(addProduct);
+            return basket;
         }
-        return false;
+        return Optional.empty();
     }
 
     @Override
@@ -47,6 +45,39 @@ public class LocalBasketRepository implements BasketRepository{
                 .findFirst();
     }
 
+    @Override
+    public Optional<Basket> changeProductCount(long basketId, long productId, int count) {
+        Optional<Basket> basket = getBasketById(basketId);
+        if (basket.isPresent()) {
+            List<Product> productList = basket.get().getProductList();
+            for (Product existingProduct : productList) {
+                if (existingProduct.getProductId() == productId) {
+                   existingProduct.setCount(count);
+                    return basket;
+                }
+            }
+        }
+        return Optional.empty();
+    }
+    @Override
+    public Optional<Basket> deleteProductToBasket(long basketId, long productId) {
+        Optional<Basket> basket = getBasketById(basketId);
+        Optional<Product> product = productRepository.findById(productId);
+        if (basket.isPresent() && product.isPresent()) {
+            basket.get().getProductList().removeIf(existingProduct -> existingProduct.getProductId() == productId);
+            return basket;
+        }
+        return Optional.empty();
+    }
+
+    public Basket createBasket(long basketId) {
+        List<Product> products = new ArrayList<>();
+        Basket basket = new Basket(basketId, products, "");
+        baskets.add(basket);
+        return basket;
+    }
 
 
 }
+
+

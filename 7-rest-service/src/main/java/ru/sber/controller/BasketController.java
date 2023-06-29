@@ -26,17 +26,12 @@ public class BasketController {
 
 
     @PostMapping("/{basketId}")
-    public ResponseEntity<String> addProductToBasket(@PathVariable long basketId, @RequestBody Product product) {
-        Optional<Product> optionalProduct = productRepository.findById(product.getProductId());
-        if (optionalProduct.isPresent()) {
-            boolean added = basketRepository.addProductToBasket(basketId, product.getProductId());
-            if (added) {
-                return ResponseEntity.ok("Продукт " + product.getProductId() + " добавлен в корзину");
-            } else {
-                return ResponseEntity.notFound().build();
-            }
+    public ResponseEntity<Basket> addProductToBasket(@PathVariable long basketId, @RequestBody Product product) {
+        Optional<Basket> addedBasket = basketRepository.addProductToBasket(basketId, product.getProductId());
+        if (addedBasket.isPresent()) {
+            return ResponseEntity.ok(addedBasket.get());
         } else {
-            return ResponseEntity.badRequest().body("Продукт с ID " + product.getProductId() + " не найден");
+            return ResponseEntity.notFound().build();
         }
     }
 
@@ -52,5 +47,28 @@ public class BasketController {
         }
     }
 
+    @PutMapping("/{basketId}/product/{productId}")
+    public ResponseEntity<Basket> changeCountToBasket(@PathVariable long basketId, @PathVariable long productId,
+                                                      @RequestParam int count) {
+        Optional<Basket> changedBasket = basketRepository.changeProductCount(basketId, productId, count);
+        if (changedBasket.isPresent()) {
+            return ResponseEntity.ok(changedBasket.get());
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+    @DeleteMapping("{basketId}")
+    public ResponseEntity<Basket> deleteProductToBasket(@PathVariable long basketId, @RequestBody Product product) {
+        Optional<Basket> addedBasket = basketRepository.deleteProductToBasket(basketId, product.getProductId());
+        if (addedBasket.isPresent()) {
+            return ResponseEntity.ok(addedBasket.get());
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 
+//    @PostMapping("/{cartId}/payment")
+//    public PayCard processPayment(@PathVariable long basketId) {
+//        return basketRepository.payment(cartId);
+//    }
 }

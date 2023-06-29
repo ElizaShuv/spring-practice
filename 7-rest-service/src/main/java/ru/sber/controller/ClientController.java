@@ -30,11 +30,9 @@ public class ClientController {
     @GetMapping
     public List<Map<String, Object>> getClients(@RequestParam(required = false) Long clientId) {
         log.info("Список клиентов по id {}", clientId);
-
-        List<Map<String, Object>> clientResponses = clientRepository.findAll(clientId);
+        List<Map<String, Object>> clientResponses = clientRepository.findClient(clientId);
         return clientResponses;
     }
-
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteProduct(@PathVariable long id) {
