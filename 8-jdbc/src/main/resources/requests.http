@@ -1,0 +1,75 @@
+###
+POST localhost:8081/clients
+Content-Type: application/json
+
+{
+  "clientName": "Иван",
+  "login": "ivan",
+  "password": "12345",
+  "email": "ivan@gmail.com"
+}
+###
+GET localhost:8081/clients?clientId=2
+Content-Type: application/json
+
+###
+DELETE localhost:8081/clients/6
+
+###
+POST localhost:8081/products
+Content-Type: application/json
+
+{
+  "productName": "Ананас",
+  "price": 200,
+  "count": 10
+}
+
+###
+GET localhost:8081/products?name=Яблоко
+Content-Type: application/json
+
+###
+GET localhost:8081/products/3
+
+###
+PUT localhost:8081/products
+Content-Type: application/json
+
+{
+  "productId": 2,
+  "productName": "Апельсин",
+  "price": 80,
+  "count": 1
+}
+
+###
+DELETE localhost:8081/products/2
+
+###
+POST localhost:8081/basket/6
+Content-Type: application/json
+
+{
+  "productId": 2
+}
+
+###
+GET localhost:8081/basket/2
+Content-Type: application/json
+
+###
+PUT localhost:8081/basket/2/product/2?count=5
+Content-Type: application/json
+
+###
+DELETE localhost:8081/basket/2
+Content-Type: application/json
+
+{
+  "productId": 4
+}
+
+###
+POST localhost:8081/bank/basket/2/card/1
+Content-Type: application/json
