@@ -9,7 +9,7 @@ Content-Type: application/json
   "email": "ivan@gmail.com"
 }
 ###
-GET localhost:8081/clients?clientId=2
+GET localhost:8081/clients?clientId=8
 Content-Type: application/json
 
 ###
@@ -47,19 +47,19 @@ Content-Type: application/json
 DELETE localhost:8081/products/2
 
 ###
-POST localhost:8081/basket/6
+POST localhost:8081/basket/8
 Content-Type: application/json
 
 {
-  "productId": 2
+  "productId": 3
 }
 
 ###
-GET localhost:8081/basket/2
+GET localhost:8081/basket/8
 Content-Type: application/json
 
 ###
-PUT localhost:8081/basket/2/product/2?count=5
+PUT localhost:8081/basket/8/product/3?count=5
 Content-Type: application/json
 
 ###
@@ -71,5 +71,5 @@ Content-Type: application/json
 }
 
 ###
-POST localhost:8081/bank/basket/2/card/1
+POST localhost:8081/bank/basket/8/card/1
 Content-Type: application/json

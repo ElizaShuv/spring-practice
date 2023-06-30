@@ -104,19 +104,18 @@ public boolean deleteById(long clientId) {
         deleteProductsCartsStatement.setLong(1, clientId);
         deleteCartStatement.setLong(1, clientId);
 
+        connection.setAutoCommit(false);
 
-        connection.setAutoCommit(false); // Отключаем автоматическую фиксацию транзакции
+        deleteClientStatement.executeUpdate();
+        deleteProductsCartsStatement.executeUpdate();
 
-        deleteClientStatement.executeUpdate(); // Удаляем запись из таблицы clients
-        deleteProductsCartsStatement.executeUpdate(); // Удаляем связанные записи из таблицы products_carts
-      // Удаляем запись из таблицы carts
         int clientRowsAffected =    deleteCartStatement.executeUpdate();
 
         if (clientRowsAffected > 0) {
-            connection.commit(); // Фиксируем транзакцию
+            connection.commit();
             return true;
         } else {
-            connection.rollback(); // Откатываем транзакцию
+            connection.rollback();
             return false;
         }
 
