@@ -99,7 +99,6 @@ public boolean deleteById(long clientId) {
          PreparedStatement deleteCartStatement = connection.prepareStatement(deleteCartSql);
          PreparedStatement deleteClientStatement = connection.prepareStatement(deleteClientSql)) {
 
-
         deleteClientStatement.setLong(1, clientId);
         deleteProductsCartsStatement.setLong(1, clientId);
         deleteCartStatement.setLong(1, clientId);
@@ -109,7 +108,7 @@ public boolean deleteById(long clientId) {
         deleteClientStatement.executeUpdate();
         deleteProductsCartsStatement.executeUpdate();
 
-        int clientRowsAffected =    deleteCartStatement.executeUpdate();
+        int clientRowsAffected = deleteCartStatement.executeUpdate();
 
         if (clientRowsAffected > 0) {
             connection.commit();
