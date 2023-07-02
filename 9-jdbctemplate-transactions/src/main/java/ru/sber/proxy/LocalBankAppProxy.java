@@ -35,7 +35,7 @@ public class LocalBankAppProxy implements BankAppProxy {
 
         private List<PayCard> payCardList = new ArrayList<>(List.of(
                 new PayCard(1, BigDecimal.valueOf(10000)),
-                new PayCard(3, BigDecimal.valueOf(100))
+                new PayCard(2, BigDecimal.valueOf(100))
         )
         );
 
@@ -98,10 +98,13 @@ public class LocalBankAppProxy implements BankAppProxy {
 
                     payCard.get().setBalance(result);
                     return ResponseEntity.ok("Оплата прошла успешно");
+                      } else {
+                        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Недостаточно средств на карте");
+                    }
                 }
             }
-            }
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Недостаточно средств на карте");
+
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Ошибка при обработке платежа");
               }
 
     }
