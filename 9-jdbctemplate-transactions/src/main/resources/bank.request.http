@@ -1,0 +1,11 @@
+###
+POST localhost:8081/bank/basket/1/card/1
+Content-Type: application/json
+
+###
+POST localhost:8081/bank/basket/2/card/1
+Content-Type: application/json
+
+###
+POST localhost:8081/bank/basket/3/card/2
+Content-Type: application/json

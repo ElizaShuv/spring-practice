@@ -1,0 +1,25 @@
+
+###
+POST localhost:8081/basket/1
+Content-Type: application/json
+
+{
+  "productId": 2,
+  "count": 2
+}
+
+###
+GET localhost:8081/basket/3
+Content-Type: application/json
+
+###
+PUT localhost:8081/basket/1/product/1?count=5
+Content-Type: application/json
+
+###
+DELETE localhost:8081/basket/3
+Content-Type: application/json
+
+{
+  "productId": 3
+}

@@ -1,0 +1,16 @@
+###
+POST localhost:8081/clients
+Content-Type: application/json
+
+{
+  "clientName": "Елизавета",
+  "login": "elizaveta",
+  "password": "11111",
+  "email": "elizaveta@gmail.com"
+}
+###
+GET localhost:8081/clients?clientId=1
+Content-Type: application/json
+
+###
+DELETE localhost:8081/clients/4
