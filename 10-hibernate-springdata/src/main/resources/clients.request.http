@@ -1,0 +1,38 @@
+###
+POST localhost:8081/clients
+Content-Type: application/json
+
+{
+  "clientName": "Елизавета",
+  "login": "elizaveta",
+  "password": "11111",
+  "email": "elizaveta@gmail.com"
+}
+
+###
+POST localhost:8081/clients
+Content-Type: application/json
+
+{
+  "clientName": "Иван",
+  "login": "ivan",
+  "password": "11111",
+  "email": "ivan@gmail.com"
+}
+
+###
+POST localhost:8081/clients
+Content-Type: application/json
+
+{
+  "clientName": "Петр",
+  "login": "petr",
+  "password": "11111",
+  "email": "petr@gmail.com"
+}
+###
+GET localhost:8081/clients?clientId=1
+Content-Type: application/json
+
+###
+DELETE localhost:8081/clients/1

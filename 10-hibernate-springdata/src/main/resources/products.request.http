@@ -1,0 +1,42 @@
+###
+POST localhost:8081/products
+Content-Type: application/json
+
+{
+  "productName": "Манго",
+  "price": 200,
+  "count": 10
+}
+###
+POST localhost:8081/products
+Content-Type: application/json
+
+{
+"productName": "Ананас",
+"price": 300,
+"count": 10
+}
+###
+GET localhost:8081/products
+Content-Type: application/json
+
+###
+GET localhost:8081/products?name=Манго
+Content-Type: application/json
+
+###
+GET localhost:8081/products/3
+
+###
+PUT localhost:8081/products
+Content-Type: application/json
+
+{
+  "productId": 2,
+  "productName": "Ананас",
+  "price": 300,
+  "count": 10
+}
+
+###
+DELETE localhost:8081/products/
