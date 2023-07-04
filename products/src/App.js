@@ -3,7 +3,6 @@ import './App.css';
 import { Products } from "./components/ProductCard";
 import Cart from "./components/Cart";
 import { products } from "./components/ProductCard";
-import ProductManagement from "./components/ProductManagement";
 import {Profile} from "./components/Profile";
 import ProductManagementActivation from "./components/ProductManagementActivation";
 import SearchBar from "./components/SearchBar";

@@ -73,5 +73,3 @@ export const Products = ({ products, addToCart }) => {
     );
 };
 
-export default Products;
-
